@@ -3,11 +3,11 @@ from tkinter import ttk
 from tkinter import messagebox
 from PIL import Image,ImageTk
 import mysql.connector
-con=mysql.connector.connect(host="localhost",user="root",passwd="shivam2667",database="kk1")
+con=mysql.connector.connect(host="localhost",user="root",passwd="shivam2667",database="kk420")
 cursor=con.cursor()
- 
-#cursor.execute("create database kk1")
-#cursor.execute("create table kk1 (First_name varchar(22),Last_name varchar(22),Mobile int(30))")
+#query= "create database kk420"
+#cursor.execute(query)
+#cursor.execute("create table kk42 (First_name varchar(22),Last_name varchar(22),Email varchar(22))")
 rahul=Tk()
 rahul.title("BUS RESERVATION SYSTEM")
 rahul.geometry("1100x1200")
@@ -190,8 +190,8 @@ def re():
     
     Entry(x,fg="green",textvariable=q,bg="pink").grid(row=2,column=1)
     Entry(x,fg="green",textvariable=v,bg="pink").grid(row=3,column=1)
-    Entry(x,fg="green",textvariable=w,bg="pink").grid(row=4,column=1)
-    Entry(x,fg="green",bg="pink").grid(row=5,column=1)
+    Entry(x,fg="green",bg="pink").grid(row=4,column=1)
+    Entry(x,fg="green",textvariable=w,bg="pink").grid(row=5,column=1)
     Entry(x,fg="green",bg="pink").grid(row=6,column=1)
     Entry(x,fg="green",bg="pink").grid(row=7,column=1)
     Entry(x,fg="green",bg="pink").grid(row=8,column=1)
@@ -206,8 +206,9 @@ def re():
     l.insert(3,"French")
     l.insert(4,"chinese")
     l.grid(row=13)
-    
-
+    a=q.get()
+    b=v.get()
+    c=w.get()
     def display():
         n=Tk()
         n.geometry("600x600")
@@ -220,28 +221,24 @@ def re():
         trv.pack()
         trv.heading(1, text="First_name")
         trv.heading(2, text="Last_name")
-        trv.heading(3, text="Mobile")
- 
-   #######################################################
+        trv.heading(3, text="Email")
+#####################################################
         def update(rows):
             for i in rows:
                 trv.insert('',0,values=i)
-    
 ################################
-    
         def show():
-            sql=("insert into kk1 (First_name,Last_name,Mobile) values(%s,%s,%s)")
-            val=[(q.get(),v.get() ,w.get())]
+            sql=("insert into kk42 (First_name,Last_name,Email) values(%s,%s,%s)")
+            val=[("Rahul","Maddheshiya","rahul256@gmail.com"),("shivam","verma","sv2667@gmail.com"),("Aditya","shekhar","ak56@gmail.com"),("shubham","verma","shubham2552@gmail.com"),("kartik","verma","kartikey256@gmail.com"),(a,b,c)]
             cursor.executemany(sql,val)
             con.commit()
-            cursor.execute("select * from kk1")
+            cursor.execute("select * from kk42")
             rows=cursor.fetchall()
-            update(rows)  
+            update(rows)
         Button(wrapper2, text="Show", command=show).grid(row=5,column=0,padx=10)
         n.mainloop()
     Button(x,text="submit",bg="orange",fg="blue",activebackground="blue",font=("Courier",20,"italic","bold"),width=18,command=display).grid(row=13,column=1)
     x.mainloop()
- 
 Button(rahul,text="LOGIN",bg="purple",fg="white",command=login,activebackground="blue",font=("Courier",30,"italic","bold"),width=18).place(x=480,y=300)
 Label(rahul,text="OR",bg="white",font=("Courier",15,"bold")).place(x=680,y=381)
 Button(rahul,text="REGISTER",bg="purple",fg="white",activebackground="orange",font=("Courier",30,"italic","bold"),command=re).place(x=580,y=408)
